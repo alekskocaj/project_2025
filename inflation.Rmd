@@ -1,7 +1,7 @@
 ---
 title: "Inflation Data"
 author: "Aleksander Kocaj"
-date: "27. September 2023"
+date: "`r Sys.Date()`"
 output: html_document
 repro:
   packages:
@@ -16,6 +16,8 @@ repro:
 ---
 
 ```{r setup, include=FALSE}
+#install.packages(c("tidyverse", "rmarkdown", "markdown", "remotes", "here", "reticulate", "remotes", "shiny"))
+#remotes::install_github("aaronpeikert/repro")
 repro::automate_load_packages()
 repro::automate_load_scripts()
 knitr::opts_chunk$set(echo = FALSE)
@@ -37,7 +39,7 @@ I quote:
 # note that they must be empty and the names must correspond
 ```
 
-For this dataset the Bank of England asked `r prettyNum(nrow(inflation), big.mark = ".", decimal.mark = ",")` people for their opinion on the perceived and expected inflation.
+For this **dataset** the *Bank of England* asked `r prettyNum(nrow(inflation), big.mark = ".", decimal.mark = ",")` people for their opinion on the perceived and expected inflation.
 The survey has run quarterly since `r min(inflation$year)`.
 
 ```{r}
@@ -51,7 +53,7 @@ inflation %>%
   ggplot() +
   geom_line(aes(date, value, color = name)) +
   theme_minimal() +
-  ylab("subjective inflation in %-points") +
+  ylab("subjective inflation in percentage points") +
   labs(color = "") +
   theme(legend.position = c(.1, .9)) +
   NULL
@@ -62,3 +64,10 @@ with(mtcars, plot(hp, mpg))
 ```
 
 This data set has information on `r prettyNum(nrow(mtcars), big.mark = ".", decimal.mark = ",")` cars.
+
+```{r}
+with(mtcars, plot(mpg, cyl),  main = "Miles per gallon plotted against cylinders")
+with(mtcars, abline(lm(mpg ~ cyl)))
+```
+
+The data set *mtcars* contains `r prettyNum(ncol(mtcars), big.mark = ".", decimal.mark = ",")` variables.

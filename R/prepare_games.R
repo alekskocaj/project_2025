@@ -1,8 +1,13 @@
 # 1. list requirements early
 # (i.e., load libraries at the beginning)
-library(here)
-library(tidyverse)
-library(lubridate)
+
+install.packages("groundhog")
+library("groundhog")
+pkgs <- c("here","tidyverse", "lubridate")
+groundhog.library(pkgs, "2025-09-16")
+
+# the package "here" can be used for relative paths and is better than the function "setwd"; see for more information: https://here.r-lib.org/
+here()
 
 #----load-inflation----
 # 2. use relative locations
@@ -17,3 +22,9 @@ games_raw <- readr::read_csv(
 # (i.e., variable names are documentation + comments)
 games <- mutate(games_raw, date = str_c(month, "_", year) %>% # concatenate month and year
                   my()) # my = month year -> convert to date
+
+str(games)
+table(games$gamename, useNA ='always')
+
+with(mtcars, plot(hp, mpg))
+str(mtcars)
